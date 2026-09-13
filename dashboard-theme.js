@@ -1,0 +1,12 @@
+(()=>{
+  const PALETTE=['#ef3f82','#7c49bd','#32b9e9','#ffad29','#36cf67','#ff7c6b'];
+  if(window.Chart){
+    Chart.defaults.color='#697386';
+    Chart.defaults.borderColor='#efe7ed';
+    Chart.defaults.font.family='Tahoma, Noto Sans Thai, sans-serif';
+  }
+  window.barCfg=function(labels,values,label){return {type:'bar',data:{labels,datasets:[{label,data:values,backgroundColor:labels.map((_,i)=>PALETTE[i%PALETTE.length]),borderColor:labels.map((_,i)=>PALETTE[i%PALETTE.length]),borderWidth:1,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'#2f3b50',titleColor:'#fff',bodyColor:'#fff',padding:10}},scales:{x:{grid:{display:false},ticks:{color:'#7d8696'}},y:{beginAtZero:true,grid:{color:'#f1e9ef'},ticks:{color:'#7d8696'}}}}}};
+  window.doughnutCfg=function(labels,values,label){return {type:'doughnut',data:{labels,datasets:[{label,data:values,backgroundColor:labels.map((_,i)=>PALETTE[i%PALETTE.length]),borderColor:'#fff',borderWidth:3,hoverOffset:7}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,usePointStyle:true,color:'#697386',padding:14}},tooltip:{backgroundColor:'#2f3b50',titleColor:'#fff',bodyColor:'#fff',padding:10}}}}};
+  window.lineMultiCfg=function(labels,datasets){return {type:'line',data:{labels,datasets:datasets.map((d,i)=>({label:d.label,data:d.data,borderColor:PALETTE[i%PALETTE.length],backgroundColor:PALETTE[i%PALETTE.length],borderWidth:2.5,tension:.34,pointRadius:3.5,pointHoverRadius:6,pointBackgroundColor:'#fff',pointBorderWidth:2,fill:false}))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:10,color:'#697386',padding:14}},tooltip:{backgroundColor:'#2f3b50',titleColor:'#fff',bodyColor:'#fff',padding:10}},scales:{x:{grid:{display:false},ticks:{color:'#7d8696'}},y:{beginAtZero:false,grid:{color:'#f1e9ef'},ticks:{color:'#7d8696'}}}}}};
+  setTimeout(()=>{if(typeof window.renderInteractiveDashboard==='function')window.renderInteractiveDashboard()},120);
+})();
